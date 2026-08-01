@@ -72,6 +72,11 @@ export interface WorkflowDefinition {
   name: string;
   description?: string;
   visibility?: string;
+  enabled?: boolean;
+  chain?: string | null;
+  workflowType?: string | null;
+  category?: string | null;
+  priceUsdcPerCall?: string | null;
   nodes?: WorkflowNode[];
   edges?: WorkflowEdge[];
   createdAt?: string;
@@ -89,12 +94,13 @@ export interface ExecutionTxHash {
 
 export interface ExecutionStatus {
   executionId: string;
-  status: "pending" | "running" | "success" | "error" | "cancelled";
+  status: "pending" | "running" | "success" | "error" | "cancelled" | string;
   completed: boolean;
   transactionHashes?: ExecutionTxHash[];
   output?: unknown;
   error?: string | null;
   gasUsedWei?: string | null;
+  startedAt?: string | null;
   completedAt?: string | null;
   nodeStatuses?: { nodeId: string; status: string }[];
   progress?: {
