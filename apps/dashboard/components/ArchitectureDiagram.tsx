@@ -1,30 +1,32 @@
 import type { CSSProperties, ReactNode } from "react";
 
-function WebhookIcon() {
+function FileIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c.01-.7.2-1.4.57-2" />
-      <path d="m6 17 3.13-5.78c.53-.97.1-2.18-.5-3.1a4 4 0 1 1 6.89-4.06" />
-      <path d="m12 6 3.13 5.73C15.66 12.7 16.9 13 18 13a4 4 0 0 1 0 8" />
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 13h8" />
+      <path d="M8 17h5" />
     </svg>
   );
 }
 
-function DatabaseIcon() {
+function WorkflowIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <ellipse cx="12" cy="5" rx="9" ry="3" />
-      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-      <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+      <rect x="3" y="3" width="7" height="7" rx="1.5" />
+      <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      <path d="M6.5 10v2a3 3 0 0 0 3 3h4.5" />
+      <path d="M17.5 14v-2a3 3 0 0 0-3-3H10" />
     </svg>
   );
 }
 
-function SparkIcon() {
+function ClockIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
-      <path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z" />
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
     </svg>
   );
 }
@@ -40,53 +42,47 @@ function BranchIcon() {
   );
 }
 
-function CheckIcon() {
+function FlagIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M20 6L9 17l-5-5" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 21V4" />
+      <path d="M4 5c4-2 8 2 12 0v9c-4 2-8-2-12 0" />
     </svg>
   );
 }
 
-function LockIcon() {
+function SendIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="5" y="11" width="14" height="10" rx="2" />
-      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+      <path d="M22 2L11 13" />
+      <path d="M22 2l-7 20-4-9-9-4z" />
     </svg>
   );
 }
 
-function BridgeIcon() {
+function ZapIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M8 3L4 7l4 4" />
-      <path d="M4 7h16" />
-      <path d="M16 21l4-4-4-4" />
-      <path d="M20 17H4" />
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
     </svg>
   );
 }
 
-function ScreenIcon() {
+function ShieldCheckIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 21h8" />
-      <path d="M12 17v4" />
+      <path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z" />
+      <path d="M9 12l2 2 4-4" />
     </svg>
   );
 }
 
-function RobotIcon() {
+function ClipboardCheckIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="4" y="8" width="16" height="12" rx="2" />
-      <circle cx="9" cy="13" r="1.5" />
-      <circle cx="15" cy="13" r="1.5" />
-      <path d="M12 8V4" />
-      <circle cx="12" cy="3" r="1" />
-      <path d="M9 17h6" />
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <path d="M9 14l2 2 4-4" />
     </svg>
   );
 }
@@ -131,7 +127,7 @@ function Node({
 export function ArchitectureDiagram() {
   return (
     <div className="canvas-scroll">
-      <div className="canvas" role="img" aria-label="CupSignal request flow: match request, fetch match data, AI signal engine, premium decision, x402 payment gate, CCTP funding, fan dashboard, and MCP agent response">
+      <div className="canvas" role="img" aria-label="AutoKeep payroll flow: strategy config, KeeperHub workflow, schedule trigger, reserves decision, simulate and submit with gas sponsorship, onchain verification, and audit trail">
         <svg className="cn-svg" viewBox="0 0 1000 640" preserveAspectRatio="none" aria-hidden="true">
           <g strokeLinecap="round" fill="none">
             <path className="cn-line" d="M 212 90 L 468 90" />
@@ -151,24 +147,24 @@ export function ArchitectureDiagram() {
           </text>
         </svg>
 
-        <Node cx={18} cy={14.06} tint="green" label="Match request" icon={<WebhookIcon />} index={0} />
-        <Node cx={50} cy={14.06} tint="blue" label="Fetch match data" icon={<DatabaseIcon />} index={1} />
-        <Node cx={82} cy={14.06} tint="amber" label="AI signal engine" icon={<SparkIcon />} index={2} />
-        <Node cx={50} cy={36.72} tint="amber" label="Premium requested?" icon={<BranchIcon />} index={3} />
-        <Node cx={23} cy={59.4} tint="gray" label="Free signal shown" icon={<CheckIcon />} index={4} size="sm" />
-        <Node cx={78} cy={59.4} tint="gray" label="x402 payment gate" icon={<LockIcon />} index={5} size="lg" />
-        <Node cx={50} cy={78.1} tint="indigo" label="CCTP: fund USDC" icon={<BridgeIcon />} index={6} />
-        <Node cx={65} cy={83.6} tint="blue" label="Fan dashboard" icon={<ScreenIcon />} index={7} />
-        <Node cx={91} cy={83.6} tint="purple" label="MCP agent response" icon={<RobotIcon />} index={8} />
+        <Node cx={18} cy={14.06} tint="green" label="Strategy config" icon={<FileIcon />} index={0} />
+        <Node cx={50} cy={14.06} tint="blue" label="KeeperHub workflow" icon={<WorkflowIcon />} index={1} />
+        <Node cx={82} cy={14.06} tint="amber" label="Schedule fires" icon={<ClockIcon />} index={2} />
+        <Node cx={50} cy={36.72} tint="amber" label="Sufficient reserves?" icon={<BranchIcon />} index={3} />
+        <Node cx={23} cy={59.4} tint="gray" label="Run flagged" icon={<FlagIcon />} index={4} size="sm" />
+        <Node cx={78} cy={59.4} tint="gray" label="Simulate + submit" icon={<SendIcon />} index={5} size="lg" />
+        <Node cx={50} cy={78.1} tint="indigo" label="Gas sponsorship" icon={<ZapIcon />} index={6} />
+        <Node cx={65} cy={83.6} tint="blue" label="Onchain verification" icon={<ShieldCheckIcon />} index={7} />
+        <Node cx={91} cy={83.6} tint="purple" label="Audit trail" icon={<ClipboardCheckIcon />} index={8} />
 
         <span className="cn-chip" aria-hidden="true">
-          402 · Payment Required
+          Gas sponsored · just-in-time
         </span>
       </div>
       <p className="cn-caption">
-        The conditional branch gates the free verdict from premium. Funding can arrive just-in-time
-        via CCTP when the destination chain has no USDC yet, then the gate fans out to dashboard and
-        agent delivery.
+        The decision branch gates payroll behind treasury reserves. If funds are short, the run is
+        flagged and the treasury is never touched. Otherwise KeeperHub simulates, submits, and
+        retries with gas sponsored, then the run fans out to verification and the audit trail.
       </p>
     </div>
   );
