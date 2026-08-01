@@ -28,7 +28,13 @@ export default async function OverviewPage() {
   return (
     <>
       <section className="hero">
-        <h1>Treasury that runs itself</h1>
+        <div className="hero-eyebrow">
+          <span className="live-dot" />
+          Autonomous treasury · live
+        </div>
+        <h1>
+          Treasury that <span className="grad">runs itself</span>
+        </h1>
         <p>
           AutoKeep renders a KeeperHub workflow from your strategy, executes on schedule, and
           verifies each run against intent. No signer babysitting, full audit trail.
@@ -37,23 +43,27 @@ export default async function OverviewPage() {
 
       <section className="stats">
         <Stat
+          className="entrance entrance-1"
           label="Treasury native"
           value={nativeBalance ? `${nativeBalance.balance} ${nativeBalance.symbol}` : "unavailable"}
           sub={`wallet ${snapshot.walletAddress.slice(0, 6)}\u2026${snapshot.walletAddress.slice(-4)}`}
           tone={nativeBalance ? (Number(nativeBalance.balance) > 0 ? "ok" : "muted") : "muted"}
         />
         <Stat
+          className="entrance entrance-2"
           label="USDC reserves"
           value={usdcBalance ? `${usdcBalance.balance} USDC` : "unavailable"}
           tone={usdcBalance ? (Number(usdcBalance.balance) > 0 ? "ok" : "muted") : "muted"}
         />
         <Stat
+          className="entrance entrance-3"
           label="Active schedules"
           value={String(activeSchedules)}
           sub={`${snapshot.workflows.length} AutoKeep workflows`}
           tone={activeSchedules > 0 ? "accent" : "muted"}
         />
         <Stat
+          className="entrance entrance-4"
           label="Onchain transfers"
           value={String(transfersLanded)}
           sub={`${successful} executions succeeded`}
@@ -66,7 +76,7 @@ export default async function OverviewPage() {
           <div className="balance-rows">
             <div className="balance-row">
               <span className="balance-name">
-                <span className="balance-dot native" />
+                <span className="balance-dot native">Ξ</span>
                 Native {nativeBalance?.symbol ?? "ETH"}
               </span>
               <span className="balance-amount">
@@ -75,7 +85,7 @@ export default async function OverviewPage() {
             </div>
             <div className="balance-row">
               <span className="balance-name">
-                <span className="balance-dot usdc" />
+                <span className="balance-dot usdc">$</span>
                 USDC
               </span>
               <span className="balance-amount">
@@ -88,7 +98,7 @@ export default async function OverviewPage() {
         <Card
           title="Schedules"
           action={
-            <Badge tone={activeSchedules > 0 ? "ok" : "warn"}>
+            <Badge tone={activeSchedules > 0 ? "ok" : "warn"} dot>
               {activeSchedules > 0 ? "live" : "paused"}
             </Badge>
           }
@@ -104,7 +114,7 @@ export default async function OverviewPage() {
                 <div key={workflow.id} className="schedule">
                   <div className="schedule-head">
                     <span className="schedule-name">{workflow.name.replace(/^autokeep-payroll-/, "")}</span>
-                    <Badge tone={workflow.enabled ? "ok" : "neutral"}>
+                    <Badge tone={workflow.enabled ? "ok" : "neutral"} dot={!workflow.enabled}>
                       {workflow.enabled ? "enabled" : "disabled"}
                     </Badge>
                   </div>
@@ -139,7 +149,7 @@ export default async function OverviewPage() {
         </Card>
       </div>
 
-      <section>
+      <section className="entrance entrance-3">
         <h2 className="section-title">Recent executions</h2>
         <Card>
           <ExecutionTable
