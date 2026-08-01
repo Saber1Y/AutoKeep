@@ -296,8 +296,18 @@ export class KeeperHubClient {
     return this.request("POST", `/api/workflows/${workflowId}/execute`, { input });
   }
 
-  getWorkflowExecutions(workflowId: string): Promise<ExecutionStatus[]> {
-    return this.request("GET", `/api/workflows/${workflowId}/executions`);
+  async getWorkflowExecutions(workflowId: string): Promise<ExecutionStatus[]> {
+    const executions = await this.request<ExecutionStatus[]>(
+      "GET",
+      `/api/workflows/${workflowId}/executions`
+    );
+    return executions.map((execution) => {
+      const raw = execution as ExecutionStatus & { id?: string };
+      if (raw.id && !raw.executionId) {
+        return { ...execution, executionId: raw.id };
+      }
+      return execution;
+    });
   }
 
   getExecutionStatus(executionId: string): Promise<ExecutionStatus> {
