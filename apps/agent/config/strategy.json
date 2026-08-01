@@ -8,19 +8,19 @@
     "tokenAddress": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
     "salaries": [
       {
-        "recipientAddress": "0x1111111111111111111111111111111111111111",
+        "recipientAddress": "0x3Aa77077a0c8eddc7cCbb28Eff31605b7e6A79EA",
         "label": "Core Dev",
-        "amount": "1000"
+        "amount": "8"
       },
       {
-        "recipientAddress": "0x2222222222222222222222222222222222222222",
+        "recipientAddress": "0x06c2D94CD4b3AAF10C077C341f2f1FB0D203348c",
         "label": "Community Lead",
-        "amount": "750"
+        "amount": "6"
       },
       {
-        "recipientAddress": "0x3333333333333333333333333333333333333333",
+        "recipientAddress": "0x4Aebb76C8D0BB9e46f44B97333e516335CeC49B7",
         "label": "Designer",
-        "amount": "500"
+        "amount": "4"
       }
     ]
   }
