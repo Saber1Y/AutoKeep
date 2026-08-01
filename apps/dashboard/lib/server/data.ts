@@ -188,10 +188,56 @@ async function fetchExecutions(
 ): Promise<DashboardExecution[]> {
   try {
     const executions = await client.getWorkflowExecutions(workflow.id);
-    return executions.map((execution) => toDashboardExecution(workflow, execution));
+    const recent = executions.slice(0, 6);
+    const enriched = await Promise.all(
+      recent.map(async (execution) => {
+        const logHashes = await extractTxHashesFromLogs(client, execution.executionId);
+        return { ...execution, transactionHashes: mergeTxHashes(execution.transactionHashes ?? [], logHashes) };
+      })
+    );
+    return enriched.map((execution) => toDashboardExecution(workflow, execution));
   } catch {
     return [];
   }
+}
+
+async function extractTxHashesFromLogs(
+  client: KeeperHubClient,
+  executionId: string
+): Promise<ExecutionTxHash[]> {
+  try {
+    const { logs } = await client.getExecutionLogs(executionId);
+    const hashes: ExecutionTxHash[] = [];
+    for (const log of logs) {
+      const output = log.output as Record<string, unknown>;
+      if (
+        typeof output.transactionHash === "string" &&
+        /^0x[a-fA-F0-9]{64}$/.test(output.transactionHash)
+      ) {
+        hashes.push({
+          hash: output.transactionHash,
+          nodeId: log.nodeId,
+          nodeName: log.nodeName,
+          chainId: Number(getNetworkId()),
+        });
+      }
+    }
+    return hashes;
+  } catch {
+    return [];
+  }
+}
+
+function mergeTxHashes(existing: ExecutionTxHash[], fromLogs: ExecutionTxHash[]): ExecutionTxHash[] {
+  const merged = [...existing];
+  const seen = new Set(existing.map((hash) => hash.hash));
+  for (const hash of fromLogs) {
+    if (!seen.has(hash.hash)) {
+      merged.push(hash);
+      seen.add(hash.hash);
+    }
+  }
+  return merged;
 }
 
 export async function getDashboardSnapshot(): Promise<DashboardSnapshot> {
