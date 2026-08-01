@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import "./globals.css";
-import { Header } from "../components/Header";
+import { Sidebar } from "../components/Sidebar";
+import { Topbar } from "../components/Topbar";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -19,19 +20,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={sora.variable}>
-        <div className="bg-orbs" aria-hidden="true">
-          <div className="orb orb-a" />
-          <div className="orb orb-b" />
-          <div className="orb orb-c" />
-        </div>
-        <Header />
-        <main className="main">{children}</main>
-        <footer className="footer">
-          <div className="main" style={{ paddingTop: 0, paddingBottom: 0 }}>
-            AutoKeep runs on KeeperHub. Every execution is simulated before it lands, then
-            verified against the strategy intent.
+        <div className="app-shell">
+          <Sidebar />
+          <div className="app-content">
+            <Topbar />
+            <main className="main">{children}</main>
+            <footer className="footer">
+              AutoKeep runs on KeeperHub. Every execution is simulated before it lands, then
+              verified against the strategy intent.
+            </footer>
           </div>
-        </footer>
+        </div>
       </body>
     </html>
   );
