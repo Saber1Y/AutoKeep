@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={sora.variable}>
+    <html lang="en" className={sora.variable}>
+      <body>
         <div className="app-shell">
           <Sidebar />
           <div className="app-content">
