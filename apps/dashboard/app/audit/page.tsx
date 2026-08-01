@@ -25,9 +25,7 @@ export default async function AuditPage() {
           <span className="live-dot" />
           Execution audit
         </div>
-        <h1>
-          Every run, <span className="grad">onchain</span>
-        </h1>
+        <h1>Every run, onchain</h1>
         <p>
           Every AutoKeep run, with the onchain transactions KeeperHub landed and the status
           recorded. Each transaction links to the explorer.
