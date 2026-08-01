@@ -1,0 +1,27 @@
+{
+  "name": "Acme DAO Treasury",
+  "description": "Payroll for the Acme DAO builder collective on Sepolia",
+  "network": "11155111",
+  "payroll": {
+    "cron": "0 9 * * 5",
+    "timezone": "UTC",
+    "tokenAddress": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+    "salaries": [
+      {
+        "recipientAddress": "0x1111111111111111111111111111111111111111",
+        "label": "Core Dev",
+        "amount": "1000"
+      },
+      {
+        "recipientAddress": "0x2222222222222222222222222222222222222222",
+        "label": "Community Lead",
+        "amount": "750"
+      },
+      {
+        "recipientAddress": "0x3333333333333333333333333333333333333333",
+        "label": "Designer",
+        "amount": "500"
+      }
+    ]
+  }
+}
