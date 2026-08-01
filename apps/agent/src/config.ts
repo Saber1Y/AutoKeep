@@ -38,7 +38,7 @@ export function validateStrategy(input: unknown): StrategyConfig {
   if (typeof raw.name !== "string" || raw.name.length === 0) {
     throw new Error("Strategy config requires a non-empty name");
   }
-  if (typeof raw.network !== "string" || !(raw.network in NETWORK_IDS)) {
+  if (typeof raw.network !== "string" || !(Object.values(NETWORK_IDS) as string[]).includes(raw.network)) {
     throw new Error(`Strategy network must be one of ${Object.values(NETWORK_IDS).join(", ")}`);
   }
 
