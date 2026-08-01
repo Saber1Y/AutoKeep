@@ -32,9 +32,7 @@ export default async function OverviewPage() {
           <span className="live-dot" />
           Autonomous treasury · live
         </div>
-        <h1>
-          Treasury that <span className="grad">runs itself</span>
-        </h1>
+        <h1>Treasury that runs itself</h1>
         <p>
           AutoKeep renders a KeeperHub workflow from your strategy, executes on schedule, and
           verifies each run against intent. No signer babysitting, full audit trail.
