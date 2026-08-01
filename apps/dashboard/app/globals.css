@@ -1201,3 +1201,339 @@ code {
     grid-template-columns: 1fr;
   }
 }
+
+/* Hero entrance (staggered on load) */
+.l-hero-eyebrow {
+  animation: fade-up 0.5s var(--ease) both;
+}
+
+.l-hero h1 {
+  animation: fade-up 0.6s var(--ease) 0.08s both;
+}
+
+.l-hero p {
+  animation: fade-up 0.6s var(--ease) 0.16s both;
+}
+
+.l-cta-row {
+  animation: fade-up 0.6s var(--ease) 0.24s both;
+}
+
+.l-stats-strip {
+  animation-delay: 0.34s;
+}
+
+/* Scroll reveal (AOS-style) */
+.reveal {
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  will-change: opacity, transform;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Section hover polish */
+.l-step {
+  transition: border-color 0.2s ease, transform 0.25s var(--ease);
+}
+
+.l-step:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+/* Architecture canvas */
+.l-eyebrow,
+.l-hero-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--signal);
+}
+
+.canvas-scroll {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.canvas {
+  position: relative;
+  min-width: 740px;
+  max-width: 980px;
+  margin: 0 auto;
+  aspect-ratio: 1000 / 640;
+}
+
+.cn-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.cn-line {
+  stroke: rgba(248, 250, 252, 0.32);
+  stroke-width: 1.8;
+  stroke-dasharray: 7 9;
+  vector-effect: non-scaling-stroke;
+  animation: dash-flow 1.4s linear infinite;
+}
+
+.cn-line-no {
+  stroke: rgba(255, 99, 92, 0.85);
+}
+
+.cn-line-yes {
+  stroke: rgba(9, 253, 103, 0.85);
+}
+
+.cn-line-fund {
+  stroke: rgba(129, 116, 255, 0.75);
+}
+
+.cn-text {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cn-text-no {
+  fill: #ff635c;
+}
+
+.cn-text-yes {
+  fill: var(--signal);
+}
+
+.cn-node {
+  position: absolute;
+  z-index: 1;
+  translate: -50% -50%;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: var(--deep);
+  border: 1px solid rgba(248, 250, 252, 0.14);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s var(--ease), border-color 0.25s ease, box-shadow 0.25s ease;
+  animation: node-in 0.5s var(--ease) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+.cn-node:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: rgba(248, 250, 252, 0.28);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
+}
+
+.cn-node-lg {
+  width: 72px;
+  height: 72px;
+}
+
+.cn-node-sm {
+  width: 56px;
+  height: 56px;
+  border-radius: 17px;
+}
+
+.cn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+}
+
+.cn-node-lg .cn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+.cn-node-sm .cn-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+}
+
+.cn-node-sm .cn-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cn-node-lg .cn-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tint-green {
+  background: rgba(9, 253, 103, 0.16);
+  color: #09fd67;
+}
+
+.tint-blue {
+  background: rgba(56, 132, 255, 0.16);
+  color: #5b9bff;
+}
+
+.tint-amber {
+  background: rgba(255, 196, 0, 0.16);
+  color: #ffcf3f;
+}
+
+.tint-gray {
+  background: rgba(148, 163, 184, 0.16);
+  color: #aebad1;
+}
+
+.tint-indigo {
+  background: rgba(129, 116, 255, 0.16);
+  color: #9487ff;
+}
+
+.tint-purple {
+  background: rgba(168, 85, 247, 0.16);
+  color: #bd7dff;
+}
+
+.cn-badge {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--signal);
+  color: var(--void);
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--void);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  animation: badge-pop 0.45s var(--ease) 0.7s both;
+}
+
+.cn-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.cn-dot.t {
+  top: -3px;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.cn-dot.r {
+  right: -3px;
+  top: 50%;
+  margin-top: -3px;
+}
+
+.cn-dot.b {
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.cn-dot.l {
+  left: -3px;
+  top: 50%;
+  margin-top: -3px;
+}
+
+.cn-label {
+  position: absolute;
+  top: calc(100% + 11px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.cn-chip {
+  position: absolute;
+  left: 78%;
+  top: 47.5%;
+  translate: -50% -50%;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  animation: chip-in 0.5s var(--ease) 0.5s both;
+}
+
+.cn-caption {
+  max-width: 620px;
+  margin: 20px auto 0;
+  text-align: center;
+  color: var(--faint);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@keyframes node-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes badge-pop {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
