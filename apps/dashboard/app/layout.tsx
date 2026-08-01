@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Sora } from "next/font/google";
 import "./globals.css";
 import { Header } from "../components/Header";
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sora",
+});
 
 export const metadata: Metadata = {
   title: "AutoKeep - Autonomous Treasury Agent",
@@ -11,7 +18,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body className={sora.variable}>
+        <div className="bg-orbs" aria-hidden="true">
+          <div className="orb orb-a" />
+          <div className="orb orb-b" />
+          <div className="orb orb-c" />
+        </div>
         <Header />
         <main className="main">{children}</main>
         <footer className="footer">
