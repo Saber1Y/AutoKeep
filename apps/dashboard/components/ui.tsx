@@ -1,0 +1,71 @@
+import type { ReactNode } from "react";
+
+export type BadgeTone = "neutral" | "ok" | "warn" | "bad" | "accent";
+
+const STATUS_TONES: Record<string, BadgeTone> = {
+  completed: "ok",
+  success: "ok",
+  running: "accent",
+  pending: "warn",
+  queued: "warn",
+  failed: "bad",
+  error: "bad",
+  cancelled: "neutral",
+};
+
+export function Badge({ tone = "neutral", children }: { tone?: BadgeTone; children: ReactNode }) {
+  return <span className={`badge badge-${tone}`}>{children}</span>;
+}
+
+export function StatusBadge({ status }: { status: string }) {
+  const tone = STATUS_TONES[status.toLowerCase()] ?? "neutral";
+  return <Badge tone={tone}>{status}</Badge>;
+}
+
+export function Card({
+  title,
+  action,
+  children,
+  className = "",
+}: {
+  title?: ReactNode;
+  action?: ReactNode;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <section className={`card ${className}`}>
+      {(title || action) && (
+        <div className="card-head">
+          {title ? <h2>{title}</h2> : <span />}
+          {action}
+        </div>
+      )}
+      <div className="card-body">{children}</div>
+    </section>
+  );
+}
+
+export function Stat({
+  label,
+  value,
+  sub,
+  tone,
+}: {
+  label: string;
+  value: string;
+  sub?: string;
+  tone?: "ok" | "bad" | "accent" | "muted";
+}) {
+  return (
+    <div className="stat">
+      <div className="stat-label">{label}</div>
+      <div className={`stat-value${tone ? ` stat-${tone}` : ""}`}>{value}</div>
+      {sub ? <div className="stat-sub">{sub}</div> : null}
+    </div>
+  );
+}
+
+export function EmptyState({ message }: { message: string }) {
+  return <div className="empty">{message}</div>;
+}
