@@ -13,8 +13,21 @@ const STATUS_TONES: Record<string, BadgeTone> = {
   cancelled: "neutral",
 };
 
-export function Badge({ tone = "neutral", children }: { tone?: BadgeTone; children: ReactNode }) {
-  return <span className={`badge badge-${tone}`}>{children}</span>;
+export function Badge({
+  tone = "neutral",
+  dot,
+  children,
+}: {
+  tone?: BadgeTone;
+  dot?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <span className={`badge badge-${tone}`}>
+      {dot ? <span className={`badge-dot${dot ? " live" : ""}`} /> : null}
+      {children}
+    </span>
+  );
 }
 
 export function StatusBadge({ status }: { status: string }) {
@@ -51,14 +64,16 @@ export function Stat({
   value,
   sub,
   tone,
+  className = "",
 }: {
   label: string;
   value: string;
   sub?: string;
   tone?: "ok" | "bad" | "accent" | "muted";
+  className?: string;
 }) {
   return (
-    <div className="stat">
+    <div className={`stat ${className}`}>
       <div className="stat-label">{label}</div>
       <div className={`stat-value${tone ? ` stat-${tone}` : ""}`}>{value}</div>
       {sub ? <div className="stat-sub">{sub}</div> : null}
