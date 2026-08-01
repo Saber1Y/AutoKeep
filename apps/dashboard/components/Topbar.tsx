@@ -21,12 +21,12 @@ export async function Topbar() {
       </div>
 
       <div className="mobile-nav">
-        <a href="/" className="mobile-brand">
+        <a href="/dashboard" className="mobile-brand">
           <span className="brand-mark" aria-hidden="true" />
           AutoKeep
         </a>
-        <NavLink href="/">Overview</NavLink>
-        <NavLink href="/audit">Audit</NavLink>
+        <NavLink href="/dashboard">Overview</NavLink>
+        <NavLink href="/dashboard/audit">Audit</NavLink>
       </div>
 
       <div className="topbar-right">

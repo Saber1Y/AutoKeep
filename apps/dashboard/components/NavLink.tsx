@@ -14,7 +14,7 @@ export function NavLink({
   children: ReactNode;
 }) {
   const pathname = usePathname();
-  const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const active = pathname === href;
 
   return (
     <Link href={href} className={`sidebar-nav-link${active ? " active" : ""}`} aria-current={active ? "page" : undefined}>

@@ -25,17 +25,17 @@ function AuditIcon() {
 export function Sidebar() {
   return (
     <aside className="sidebar">
-      <a href="/" className="sidebar-brand">
+      <a href="/dashboard" className="sidebar-brand">
         <span className="brand-mark" aria-hidden="true" />
         <span className="brand-name">AutoKeep</span>
       </a>
 
       <nav className="sidebar-nav">
         <span className="sidebar-nav-label">Treasury</span>
-        <NavLink href="/" icon={<OverviewIcon />}>
+        <NavLink href="/dashboard" icon={<OverviewIcon />}>
           Overview
         </NavLink>
-        <NavLink href="/audit" icon={<AuditIcon />}>
+        <NavLink href="/dashboard/audit" icon={<AuditIcon />}>
           Audit trail
         </NavLink>
       </nav>
