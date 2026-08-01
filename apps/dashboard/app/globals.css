@@ -34,6 +34,10 @@ body {
   padding: 0;
 }
 
+html {
+  font-family: var(--sans);
+}
+
 body {
   background: var(--bg);
   color: var(--text);
