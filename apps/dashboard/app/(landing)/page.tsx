@@ -93,8 +93,7 @@ export default async function LandingPage() {
               <div className="l-eyebrow">Architecture</div>
               <h2>How a request actually moves through the system.</h2>
               <p>
-                One fan asks, the pipeline resolves, and value settles onchain - all on the x402
-                payment rail.
+                One strategy file, one workflow, one verified payroll run - no signer in the loop.
               </p>
             </div>
           </Reveal>
