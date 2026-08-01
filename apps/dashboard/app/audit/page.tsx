@@ -21,7 +21,13 @@ export default async function AuditPage() {
   return (
     <>
       <section className="hero">
-        <h1>Execution audit</h1>
+        <div className="hero-eyebrow">
+          <span className="live-dot" />
+          Execution audit
+        </div>
+        <h1>
+          Every run, <span className="grad">onchain</span>
+        </h1>
         <p>
           Every AutoKeep run, with the onchain transactions KeeperHub landed and the status
           recorded. Each transaction links to the explorer.
@@ -29,10 +35,15 @@ export default async function AuditPage() {
       </section>
 
       <section className="stats">
-        <Stat label="Executions" value={String(totalExecutions)} tone="accent" />
-        <Stat label="Succeeded" value={String(successful)} tone="ok" />
-        <Stat label="Failed" value={String(failed)} tone={failed > 0 ? "bad" : "muted"} />
-        <Stat label="Transactions" value={String(transfersLanded)} tone="ok" />
+        <Stat className="entrance entrance-1" label="Executions" value={String(totalExecutions)} tone="accent" />
+        <Stat className="entrance entrance-2" label="Succeeded" value={String(successful)} tone="ok" />
+        <Stat
+          className="entrance entrance-3"
+          label="Failed"
+          value={String(failed)}
+          tone={failed > 0 ? "bad" : "muted"}
+        />
+        <Stat className="entrance entrance-4" label="Transactions" value={String(transfersLanded)} tone="ok" />
       </section>
 
       {snapshot.workflows.map((workflow) => {
@@ -41,7 +52,7 @@ export default async function AuditPage() {
         );
         const lastRun = executions[0]?.completedAt ?? null;
         return (
-          <section key={workflow.id} style={{ marginBottom: 28 }}>
+          <section key={workflow.id} style={{ marginBottom: 28 }} className="entrance entrance-2">
             <h2 className="section-title">
               {workflow.name.replace(/^autokeep-payroll-/, "")}
               <span className="muted" style={{ fontSize: 14, marginLeft: 10 }}>
