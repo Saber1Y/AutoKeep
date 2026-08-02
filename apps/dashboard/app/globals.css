@@ -846,6 +846,38 @@ code {
   line-height: 1.05;
 }
 
+.rotating-word-wrap {
+  display: inline-block;
+  min-width: 12ch;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.rotating-word {
+  display: inline-block;
+  color: var(--signal);
+  transition:
+    opacity 280ms var(--ease),
+    transform 280ms var(--ease);
+}
+
+.rotating-word.is-swapping {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .l-hero p {
   max-width: 640px;
   margin: 0 auto 32px;
