@@ -35,6 +35,7 @@ export interface StrategyConfig {
   name: string;
   description: string;
   network: NetworkId;
+  enabled?: boolean;
   payroll?: PayrollConfig;
   allocation?: AllocationConfig;
 }
