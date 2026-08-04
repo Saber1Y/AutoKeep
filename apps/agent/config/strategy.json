@@ -2,6 +2,7 @@
   "name": "Acme DAO Treasury",
   "description": "Payroll for the Acme DAO builder collective on Sepolia",
   "network": "11155111",
+  "enabled": false,
   "payroll": {
     "cron": "0 9 * * 5",
     "timezone": "UTC",
