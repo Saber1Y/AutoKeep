@@ -67,6 +67,12 @@ export interface DashboardExecution {
   error: string | null;
 }
 
+export interface DashboardNotice {
+  tone: "warn" | "bad" | "ok";
+  title: string;
+  message: string;
+}
+
 export interface DashboardSnapshot {
   walletAddress: string;
   networkId: string;
@@ -75,6 +81,7 @@ export interface DashboardSnapshot {
   usdcBalance: BalanceEntry | null;
   workflows: DashboardWorkflow[];
   executions: DashboardExecution[];
+  notices: DashboardNotice[];
 }
 
 export function getNetworkId(): string {
@@ -240,8 +247,90 @@ function mergeTxHashes(existing: ExecutionTxHash[], fromLogs: ExecutionTxHash[])
   return merged;
 }
 
+export function cycleUsdc(workflow: DashboardWorkflow): number {
+  return workflow.roster.reduce((sum, entry) => sum + Number(entry.amount || 0), 0);
+}
+
+function computeNotices(input: {
+  walletAddress: string;
+  nativeBalance: BalanceEntry | null;
+  usdcBalance: BalanceEntry | null;
+  workflows: DashboardWorkflow[];
+}): DashboardNotice[] {
+  const notices: DashboardNotice[] = [];
+  const totalCycle = input.workflows.reduce((sum, workflow) => sum + cycleUsdc(workflow), 0);
+
+  if (input.usdcBalance && totalCycle > 0) {
+    const held = Number(input.usdcBalance.balance);
+    if (held < totalCycle) {
+      notices.push({
+        tone: "bad",
+        title: "Treasury is short for the next payroll cycle",
+        message: `The treasury holds ${held.toFixed(2)} USDC, but the next cycle needs ${totalCycle.toFixed(2)} USDC. The next run will fail unless the treasury is funded. Send USDC to ${input.walletAddress}.`,
+      });
+    }
+  }
+
+  if (input.usdcBalance === null) {
+    notices.push({
+      tone: "bad",
+      title: "USDC balance unavailable",
+      message:
+        "The onchain balance read failed, so live reserve monitoring is offline. Check the KeeperHub API key and network before relying on this dashboard.",
+    });
+  }
+
+  if (input.workflows.length === 0) {
+    notices.push({
+      tone: "warn",
+      title: "No AutoKeep workflows yet",
+      message: "Run `agent sync` to deploy a payroll schedule from your strategy file.",
+    });
+  } else if (input.workflows.every((workflow) => !workflow.enabled)) {
+    notices.push({
+      tone: "warn",
+      title: "Payroll is paused",
+      message:
+        "Every schedule is disabled, so nothing runs automatically. Enable a workflow in KeeperHub to resume payroll.",
+    });
+  }
+
+  if (input.nativeBalance === null) {
+    notices.push({
+      tone: "warn",
+      title: "Native balance unavailable",
+      message:
+        "The explorer could not be reached, so the native ETH balance is missing. USDC reserves are still read directly onchain.",
+    });
+  }
+
+  return notices;
+}
+
 export async function getDashboardSnapshot(): Promise<DashboardSnapshot> {
-  const client = getKeeperHubClient();
+  let client: KeeperHubClient;
+  try {
+    client = getKeeperHubClient();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return {
+      walletAddress: "",
+      networkId: getNetworkId(),
+      networkLabel: getNetworkLabel(),
+      nativeBalance: null,
+      usdcBalance: null,
+      workflows: [],
+      executions: [],
+      notices: [
+        {
+          tone: "bad",
+          title: "Dashboard is not connected to KeeperHub",
+          message: `${message} Live balances and workflows cannot load until a key is configured.`,
+        },
+      ],
+    };
+  }
+
   const { walletAddress } = await client.getOrganizationWalletAddress();
 
   const [nativeBalance, usdcBalance, workflows] = await Promise.all([
@@ -266,5 +355,6 @@ export async function getDashboardSnapshot(): Promise<DashboardSnapshot> {
     usdcBalance,
     workflows,
     executions,
+    notices: computeNotices({ walletAddress, nativeBalance, usdcBalance, workflows }),
   };
 }
