@@ -22,6 +22,19 @@ function AuditIcon() {
   );
 }
 
+function StrategyIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2 4h4" />
+      <circle cx="9" cy="4" r="1.5" />
+      <path d="M11 4h3" />
+      <path d="M2 12h3" />
+      <circle cx="8" cy="12" r="1.5" />
+      <path d="M10 12h4" />
+    </svg>
+  );
+}
+
 export function Sidebar() {
   return (
     <aside className="sidebar">
@@ -34,6 +47,9 @@ export function Sidebar() {
         <span className="sidebar-nav-label">Treasury</span>
         <NavLink href="/dashboard" icon={<OverviewIcon />}>
           Overview
+        </NavLink>
+        <NavLink href="/dashboard/strategy" icon={<StrategyIcon />}>
+          Strategy
         </NavLink>
         <NavLink href="/dashboard/audit" icon={<AuditIcon />}>
           Audit trail

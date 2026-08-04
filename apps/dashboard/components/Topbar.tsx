@@ -26,6 +26,7 @@ export async function Topbar() {
           AutoKeep
         </a>
         <NavLink href="/dashboard">Overview</NavLink>
+        <NavLink href="/dashboard/strategy">Strategy</NavLink>
         <NavLink href="/dashboard/audit">Audit</NavLink>
       </div>
 
