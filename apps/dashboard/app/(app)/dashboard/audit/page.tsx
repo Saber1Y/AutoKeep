@@ -1,4 +1,4 @@
-import { Card, Stat } from "../../../../components/ui";
+import { Card, Notice, Stat } from "../../../../components/ui";
 import { ExecutionTable } from "../../../../components/tables";
 import { getDashboardSnapshot } from "../../../../lib/server/data";
 import { formatTime } from "../../../../lib/format";
@@ -13,6 +13,9 @@ export default async function AuditPage() {
     ["success", "completed"].includes(execution.status.toLowerCase())
   ).length;
   const failed = totalExecutions - successful;
+  const failedCount = snapshot.executions.filter((execution) =>
+    ["failed", "error"].includes(execution.status.toLowerCase())
+  ).length;
   const transfersLanded = snapshot.executions.reduce(
     (sum, execution) => sum + execution.transactionHashes.length,
     0
@@ -31,6 +34,25 @@ export default async function AuditPage() {
           recorded. Each transaction links to the explorer.
         </p>
       </section>
+
+      {snapshot.notices.length > 0 && (
+        <section className="notices entrance">
+          {snapshot.notices.map((notice) => (
+            <Notice key={notice.title} tone={notice.tone} title={notice.title}>
+              {notice.message}
+            </Notice>
+          ))}
+        </section>
+      )}
+
+      {failedCount > 0 && (
+        <section className="notices entrance">
+          <Notice tone="bad" title={`${failedCount} execution${failedCount === 1 ? "" : "s"} failed`}>
+            Failed runs do not land treasury value. Open the failing execution in KeeperHub to
+            inspect the step that errored.
+          </Notice>
+        </section>
+      )}
 
       <section className="stats">
         <Stat className="entrance entrance-1" label="Executions" value={String(totalExecutions)} tone="accent" />
