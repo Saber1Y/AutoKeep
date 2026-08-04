@@ -275,6 +275,7 @@ export class KeeperHubClient {
       nodes?: WorkflowNode[];
       edges?: WorkflowEdge[];
       visibility?: string;
+      enabled?: boolean;
     }
   ): Promise<WorkflowDefinition> {
     return this.request("PATCH", `/api/workflows/${workflowId}`, patch);
