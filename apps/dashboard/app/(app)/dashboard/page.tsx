@@ -1,13 +1,13 @@
-import { Badge, Card, Stat } from "../../../components/ui";
+import { Badge, Card, Notice, Stat } from "../../../components/ui";
 import { ExecutionTable, RosterTable } from "../../../components/tables";
-import { getDashboardSnapshot, type DashboardWorkflow } from "../../../lib/server/data";
+import {
+  cycleUsdc,
+  getDashboardSnapshot,
+  type DashboardWorkflow,
+} from "../../../lib/server/data";
 import { formatTime, formatUsd } from "../../../lib/format";
 
 export const dynamic = "force-dynamic";
-
-function totalCycleUsdc(workflow: DashboardWorkflow): number {
-  return workflow.roster.reduce((sum, entry) => sum + Number(entry.amount || 0), 0);
-}
 
 export default async function DashboardPage() {
   const snapshot = await getDashboardSnapshot();
@@ -38,6 +38,16 @@ export default async function DashboardPage() {
           verifies each run against intent. No signer babysitting, full audit trail.
         </p>
       </section>
+
+      {snapshot.notices.length > 0 && (
+        <section className="notices entrance">
+          {snapshot.notices.map((notice) => (
+            <Notice key={notice.title} tone={notice.tone} title={notice.title}>
+              {notice.message}
+            </Notice>
+          ))}
+        </section>
+      )}
 
       <section className="stats">
         <Stat
@@ -128,9 +138,9 @@ export default async function DashboardPage() {
                     <span>
                       steps <strong>{workflow.actionCount}</strong>
                     </span>
-                    {totalCycleUsdc(workflow) > 0 && (
+                    {cycleUsdc(workflow) > 0 && (
                       <span>
-                        cycle <strong>{formatUsd(totalCycleUsdc(workflow))} USDC</strong>
+                        cycle <strong>{formatUsd(cycleUsdc(workflow))} USDC</strong>
                       </span>
                     )}
                     <span>
