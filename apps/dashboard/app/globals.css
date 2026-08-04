@@ -593,6 +593,63 @@ code {
   border: 1px solid var(--signal-border);
 }
 
+/* Notices */
+.notices {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.notice {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--warn-soft);
+}
+
+.notice-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.notice-body strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.notice-body p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.notice-ok {
+  border-color: var(--signal-border);
+  background: var(--signal-softer);
+}
+
+.notice-ok .notice-dot {
+  background: var(--signal);
+}
+
+.notice-bad {
+  border-left: 3px solid var(--off-white);
+}
+
+.notice-bad .notice-dot {
+  background: var(--off-white);
+}
+
 /* Tables */
 .table-wrap {
   overflow-x: auto;
