@@ -13,6 +13,9 @@ async function liveStats(): Promise<{
 } | null> {
   try {
     const snapshot = await getDashboardSnapshot();
+    if (!snapshot.walletAddress) {
+      return null;
+    }
     return {
       executions: snapshot.executions.length,
       transactions: snapshot.executions.reduce(
