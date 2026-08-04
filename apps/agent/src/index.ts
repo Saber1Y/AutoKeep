@@ -7,12 +7,15 @@ import { syncCommand } from "./sync.js";
 import { runCommand } from "./run.js";
 import { verifyCommand } from "./verify.js";
 import { auditCommand } from "./audit.js";
+import { toggleCommand } from "./toggle.js";
 
 const COMMANDS = {
   "check-balances": "Show treasury balances on the configured network",
   sync: "Create or update the payroll workflow from strategy config",
   run: "Manually trigger the payroll workflow (usage: run [workflowName])",
   verify: "Verify an execution against strategy intent (usage: verify <executionId>)",
+  enable: "Enable the payroll schedule (usage: enable [workflowName])",
+  disable: "Pause the payroll schedule (usage: disable [workflowName])",
   audit: "List recent executions across AutoKeep workflows",
   help: "Show this help",
 } as const;
@@ -71,6 +74,12 @@ async function main(): Promise<void> {
     }
     case "audit":
       await auditCommand(client);
+      break;
+    case "enable":
+      await toggleCommand(client, true, arg);
+      break;
+    case "disable":
+      await toggleCommand(client, false, arg);
       break;
     default:
       printHelp();
