@@ -84,3 +84,23 @@ export function Stat({
 export function EmptyState({ message }: { message: string }) {
   return <div className="empty">{message}</div>;
 }
+
+export function Notice({
+  tone = "warn",
+  title,
+  children,
+}: {
+  tone?: "warn" | "bad" | "ok";
+  title: string;
+  children?: ReactNode;
+}) {
+  return (
+    <div className={`notice notice-${tone}`} role={tone === "bad" ? "alert" : "status"}>
+      <span className="notice-dot" aria-hidden="true" />
+      <div className="notice-body">
+        <strong>{title}</strong>
+        {children ? <p>{children}</p> : null}
+      </div>
+    </div>
+  );
+}
