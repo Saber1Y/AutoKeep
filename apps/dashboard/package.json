@@ -11,6 +11,8 @@
   "dependencies": {
     "@autokeep/keeperhub-client": "*",
     "@autokeep/shared": "*",
+    "@autokeep/strategy": "*",
+    "@autokeep/verifier": "*",
     "next": "^15.3.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
