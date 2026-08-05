@@ -13,6 +13,30 @@ export const USDC_SEPOLIA = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
 export const ETHEREUM = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 
+export type AssetKey = "native" | "usdc";
+
+export interface AssetInfo {
+  symbol: string;
+  name: string;
+  decimals: number;
+  address: string;
+}
+
+export const ASSETS: Record<AssetKey, AssetInfo> = {
+  native: {
+    symbol: "ETH",
+    name: "Ether",
+    decimals: 18,
+    address: ETHEREUM,
+  },
+  usdc: {
+    symbol: "USDC",
+    name: "USD Coin",
+    decimals: 6,
+    address: USDC_SEPOLIA,
+  },
+};
+
 export interface SalaryEntry {
   recipientAddress: string;
   label: string;
