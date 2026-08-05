@@ -64,17 +64,22 @@ export function Stat({
   value,
   sub,
   tone,
+  icon,
   className = "",
 }: {
   label: string;
-  value: string;
+  value: ReactNode;
   sub?: string;
   tone?: "ok" | "bad" | "accent" | "muted";
+  icon?: ReactNode;
   className?: string;
 }) {
   return (
     <div className={`stat ${className}`}>
-      <div className="stat-label">{label}</div>
+      <div className="stat-label">
+        {icon ? <span className="stat-icon">{icon}</span> : null}
+        {label}
+      </div>
       <div className={`stat-value${tone ? ` stat-${tone}` : ""}`}>{value}</div>
       {sub ? <div className="stat-sub">{sub}</div> : null}
     </div>
