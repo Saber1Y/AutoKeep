@@ -1,6 +1,7 @@
 import type { DashboardExecution } from "../lib/server/data";
 import { explorerTxUrl, formatTime, formatUsd, shortAddress, shortHash } from "../lib/format";
 import { EmptyState, StatusBadge } from "./ui";
+import { AssetIcon } from "./assets";
 
 export function ExecutionTable({
   executions,
@@ -64,9 +65,12 @@ export function ExecutionTable({
                 </div>
               </td>
               <td>
-                <code className="mono">
-                  {execution.gasUsedWei ? `${(Number(execution.gasUsedWei) / 1e18).toFixed(6)} ETH` : "—"}
-                </code>
+                <span className="gas-cell">
+                  <AssetIcon asset="native" size={11} />
+                  <code className="mono">
+                    {execution.gasUsedWei ? `${(Number(execution.gasUsedWei) / 1e18).toFixed(6)}` : "—"}
+                  </code>
+                </span>
               </td>
               <td className="muted">{formatTime(execution.completedAt)}</td>
             </tr>

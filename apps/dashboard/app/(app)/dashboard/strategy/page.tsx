@@ -34,6 +34,7 @@ export default async function StrategyPage() {
         </section>
       )}
       <StrategyEditor
+        networkId={snapshot.networkId}
         networkLabel={snapshot.networkLabel}
         tokenAddress={USDC_SEPOLIA}
         workflow={workflowState}

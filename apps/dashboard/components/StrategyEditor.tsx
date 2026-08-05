@@ -9,6 +9,7 @@ import {
   verifyLastExecution,
   type ActionResult,
 } from "../lib/server/actions";
+import { AssetBadge } from "./assets";
 import { Badge, Card } from "./ui";
 
 interface RosterDraft {
@@ -48,10 +49,12 @@ const DEMO_ROSTER: RosterDraft[] = [
 ];
 
 export function StrategyEditor({
+  networkId,
   networkLabel,
   tokenAddress,
   workflow,
 }: {
+  networkId: string;
   networkLabel: string;
   tokenAddress: string;
   workflow: WorkflowState | null;
@@ -184,8 +187,11 @@ export function StrategyEditor({
             </label>
           </div>
           <p className="field-note">
-            Fires on <code>{cron}</code> ({timezone}). Pays in USDC <code>{tokenAddress}</code>.
+            Fires on <code>{cron}</code> ({timezone}). Settlement token:
           </p>
+          <div className="asset-note">
+            <AssetBadge asset="usdc" networkId={networkId} />
+          </div>
         </Card>
 
         <Card
