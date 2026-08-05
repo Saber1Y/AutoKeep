@@ -1,4 +1,6 @@
 import { Badge, Card, Notice, Stat } from "../../../components/ui";
+import { AssetBadge, AssetIcon, AssetTile } from "../../../components/assets";
+import { CountUp } from "../../../components/CountUp";
 import { ExecutionTable, RosterTable } from "../../../components/tables";
 import {
   cycleUsdc,
@@ -6,6 +8,7 @@ import {
   type DashboardWorkflow,
 } from "../../../lib/server/data";
 import { formatTime, formatUsd } from "../../../lib/format";
+import { ASSETS } from "@autokeep/shared";
 
 export const dynamic = "force-dynamic";
 
@@ -53,39 +56,63 @@ export default async function DashboardPage() {
         <Stat
           className="entrance entrance-1"
           label="Treasury native"
-          value={nativeBalance ? `${nativeBalance.balance} ${nativeBalance.symbol}` : "unavailable"}
+          icon={<AssetIcon asset="native" size={14} />}
+          value={
+            nativeBalance ? (
+              <CountUp
+                value={Number(nativeBalance.balance)}
+                decimals={6}
+                suffix={` ${nativeBalance.symbol}`}
+              />
+            ) : (
+              "unavailable"
+            )
+          }
           sub={`wallet ${snapshot.walletAddress.slice(0, 6)}\u2026${snapshot.walletAddress.slice(-4)}`}
           tone={nativeBalance ? (Number(nativeBalance.balance) > 0 ? "ok" : "muted") : "muted"}
         />
         <Stat
           className="entrance entrance-2"
           label="USDC reserves"
-          value={usdcBalance ? `${usdcBalance.balance} USDC` : "unavailable"}
+          icon={<AssetIcon asset="usdc" size={14} />}
+          value={
+            usdcBalance ? (
+              <CountUp value={Number(usdcBalance.balance)} decimals={2} suffix=" USDC" />
+            ) : (
+              "unavailable"
+            )
+          }
           tone={usdcBalance ? (Number(usdcBalance.balance) > 0 ? "ok" : "muted") : "muted"}
         />
         <Stat
           className="entrance entrance-3"
           label="Active schedules"
-          value={String(activeSchedules)}
+          value={<CountUp value={activeSchedules} />}
           sub={`${snapshot.workflows.length} AutoKeep workflows`}
           tone={activeSchedules > 0 ? "accent" : "muted"}
         />
         <Stat
           className="entrance entrance-4"
           label="Onchain transfers"
-          value={String(transfersLanded)}
+          value={<CountUp value={transfersLanded} />}
           sub={`${successful} executions succeeded`}
           tone={transfersLanded > 0 ? "ok" : "muted"}
         />
       </section>
 
       <div className="grid">
-        <Card title="Treasury balances" action={<Badge tone="neutral">{snapshot.networkLabel}</Badge>}>
+        <Card
+          title="Treasury balances"
+          action={<Badge tone="neutral">{snapshot.networkLabel}</Badge>}
+        >
           <div className="balance-rows">
             <div className="balance-row">
               <span className="balance-name">
-                <span className="balance-dot native">Ξ</span>
-                Native {nativeBalance?.symbol ?? "ETH"}
+                <AssetTile asset="native" />
+                <span className="balance-name-text">
+                  <span className="balance-title">{ASSETS.native.name}</span>
+                  <code className="balance-address">{ASSETS.native.address}</code>
+                </span>
               </span>
               <span className="balance-amount">
                 {nativeBalance ? `${nativeBalance.balance} ${nativeBalance.symbol}` : "\u2014"}
@@ -93,13 +120,19 @@ export default async function DashboardPage() {
             </div>
             <div className="balance-row">
               <span className="balance-name">
-                <span className="balance-dot usdc">$</span>
-                USDC
+                <AssetTile asset="usdc" />
+                <span className="balance-name-text">
+                  <span className="balance-title">{ASSETS.usdc.name}</span>
+                  <code className="balance-address">{ASSETS.usdc.address}</code>
+                </span>
               </span>
               <span className="balance-amount">
-                {usdcBalance ? `${usdcBalance.balance} USDC` : "\u2014"}
+                {usdcBalance ? `${usdcBalance.balance} ${usdcBalance.symbol}` : "\u2014"}
               </span>
             </div>
+          </div>
+          <div className="balance-footer">
+            <AssetBadge asset="usdc" networkId={snapshot.networkId} />
           </div>
         </Card>
 
